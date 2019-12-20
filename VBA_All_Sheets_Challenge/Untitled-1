@@ -1,9 +1,15 @@
-Sub multiYearStockData()
+Sub Challenge1_summaryData()
 
     Cells(1, 9).Value = "Ticker"
     Cells(1, 10).Value = "Yearly Changes"
     Cells(1, 11).Value = "Percent Changes"
     Cells(1, 12).Value = "Total Stock Volume"
+    
+    Cells(1, 15).Value = "Ticker"
+    Cells(1, 16).Value = "Value"
+    Cells(2, 14).Value = "Greatest % Increase"
+    Cells(3, 14).Value = "Greatest % Decrease"
+    Cells(4, 14).Value = "Greatest Total Volume"
 
     Dim RowTicker As String
     RowTicker = " "
@@ -83,6 +89,9 @@ Sub multiYearStockData()
                 Range("K" & SummaryTableRow).Value = TickerPercentChanges
                 Range("K" & SummaryTableRow).NumberFormat = "0.00%"
                 Range("L" & SummaryTableRow).Value = TickerVolumeTotal
+                
+                Cells(2, 16).NumberFormat = "0.00%"
+                Cells(3, 16).NumberFormat = "0.00%"
             
                 TickerVolumeTotal = 0
                 TickerYearlyChanges = 0
@@ -95,5 +104,21 @@ Sub multiYearStockData()
     Next i
      
 Cells().EntireColumn.AutoFit
+    
+End Sub
+
+Sub Challenge2_allSheets()
+
+Dim ws_Count As Integer
+Dim i As Integer
+
+         ws_Count = ActiveWorkbook.Worksheets.Count
+
+         For i = 1 To ws_Count
+         
+            Worksheets(i).Select
+            Challenge1_summaryData
+
+         Next i
 
 End Sub

@@ -1,9 +1,15 @@
-Sub multiYearStockData()
+Sub Challenge1_summaryData()
 
     Cells(1, 9).Value = "Ticker"
     Cells(1, 10).Value = "Yearly Changes"
     Cells(1, 11).Value = "Percent Changes"
     Cells(1, 12).Value = "Total Stock Volume"
+    
+    Cells(1, 15).Value = "Ticker"
+    Cells(1, 16).Value = "Value"
+    Cells(2, 14).Value = "Greatest % Increase"
+    Cells(3, 14).Value = "Greatest % Decrease"
+    Cells(4, 14).Value = "Greatest Total Volume"
 
     Dim RowTicker As String
     RowTicker = " "
@@ -29,23 +35,23 @@ Sub multiYearStockData()
 
     numRows = Range("A1", Range("A1").End(xlDown)).Rows.Count
 
-    For i = 2 To numRows
+    For I = 2 To numRows
 
-        RowTicker = Cells(i, 1).Value
-        TickerVolumeTotal = TickerVolumeTotal + Cells(i, 7).Value
+        RowTicker = Cells(I, 1).Value
+        TickerVolumeTotal = TickerVolumeTotal + Cells(I, 7).Value
 
             ' this denotes current stock type
             If CurrentTicker <> RowTicker Then
     
                 CurrentTicker = RowTicker
-                OpeningPrice = Cells(i, 3).Value
+                OpeningPrice = Cells(I, 3).Value
         
             End If
 
             ' this denotes new stock type
-            If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+            If Cells(I + 1, 1).Value <> Cells(I, 1).Value Then
     
-                ClosingPrice = Cells(i, 6).Value
+                ClosingPrice = Cells(I, 6).Value
                 TickerYearlyChanges = (ClosingPrice - OpeningPrice)
                 
                     If OpeningPrice <> 0 Then
@@ -83,6 +89,9 @@ Sub multiYearStockData()
                 Range("K" & SummaryTableRow).Value = TickerPercentChanges
                 Range("K" & SummaryTableRow).NumberFormat = "0.00%"
                 Range("L" & SummaryTableRow).Value = TickerVolumeTotal
+                
+                Cells(2, 16).NumberFormat = "0.00%"
+                Cells(3, 16).NumberFormat = "0.00%"
             
                 TickerVolumeTotal = 0
                 TickerYearlyChanges = 0
@@ -92,8 +101,8 @@ Sub multiYearStockData()
         
             End If
 
-    Next i
+    Next I
      
 Cells().EntireColumn.AutoFit
-
+    
 End Sub
